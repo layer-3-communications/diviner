@@ -9,6 +9,7 @@ module Diviner
   , Ssh(..)
   , Ftp(..)
   , Request(..)
+  , Session(..)
   , Peers(..)
   , decode
   ) where
