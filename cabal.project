@@ -1,0 +1,6 @@
+packages: .
+
+source-repository-package
+  type: git
+  location: https://github.com/byteverse/bytesmith
+  tag: acda0c26d4a90c3a426f0c4d84cd0b488f0857b8
