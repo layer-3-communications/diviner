@@ -1,5 +1,7 @@
 {-# language BangPatterns #-}
+{-# language MagicHash #-}
 {-# language MultiWayIf #-}
+{-# language NamedFieldPuns #-}
 {-# language ScopedTypeVariables #-}
 {-# language TypeApplications #-}
 
@@ -8,6 +10,7 @@ import Diviner
 import Control.Monad (when)
 import Data.Maybe (isNothing)
 import Data.Bytes (Bytes)
+import GHC.Exts (Ptr(Ptr))
 
 import qualified Data.Bytes as Bytes
 import qualified Data.List as List
@@ -22,6 +25,15 @@ main = do
   putStrLn "C"
   when (isNothing (decode exampleC)) (fail "decode failure")
   putStrLn "D"
+  case decode exampleD of
+    Nothing -> fail "Failed to decode"
+    Just (LogFtp Ftp{ssl,request=Request{command,parameters}}) -> do
+      when (ssl /= True) $ fail "Result should indicate STFP" 
+      when (not (Bytes.equalsCString (Ptr "remove"# ) command)) $
+        fail "Command should be: remove"
+      when (not (Bytes.equalsCString (Ptr "foobar.csv"# ) parameters)) $
+        fail "Parameters should be: foobar.csv"
+    Just _ -> fail "Wrong log type"
   when (isNothing (decode exampleD)) (fail "decode failure")
   putStrLn "E"
   when (isNothing (decode exampleE)) (fail "decode failure")
