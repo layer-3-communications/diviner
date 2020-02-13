@@ -23,6 +23,8 @@ main = do
   when (isNothing (decode exampleC)) (fail "decode failure")
   putStrLn "D"
   when (isNothing (decode exampleD)) (fail "decode failure")
+  putStrLn "E"
+  when (isNothing (decode exampleE)) (fail "decode failure")
   putStrLn "Finished"
 
 exampleA :: Bytes
@@ -54,4 +56,12 @@ exampleD = Bytes.fromLatinString $ List.concat
   , "Client=192.0.2.214:65234, User=jdoe><Command=remove, "
   , "Parameters=foobar.csv><Filename=E:\\Program Files (x86)\\foobar.csv, "
   , "FileSize=9361519 bytes>"
+  ]
+
+exampleE :: Bytes
+exampleE = Bytes.fromLatinString $ List.concat
+  [ "<13>Feb 12 16:21:56 JOEHOST channel: SFTP subsystem started in channel "
+  , "s_Id: 758614, c_Id: 0, c_Window: 131053, c_MaxPacket: 16384, s_Window: "
+  , "300000, s_MaxPacket: 30000 <Host=me.example.com, SessionID=29869451, "
+  , "Listener=192.0.2.65:22, Client=192.0.2.117:18249, User=jdoe>"
   ]
