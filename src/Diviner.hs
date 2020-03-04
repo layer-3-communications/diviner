@@ -206,7 +206,7 @@ requestParser = do
   -- When bytesmith-0.3.6 is released, just use char12.
   Latin.char12 () ' ' 'P' 'a' 'r' 'a' 'm' 'e' 't' 'e' 'r' 's' '='
   paramStart <- Unsafe.cursor
-  !foundComma <- Parser.skipTrailedByEither () 0x2C 0x3E
+  !foundComma <- Parser.skipTrailedBy2 () 0x3E 0x2C
   paramEndSucc <- Unsafe.cursor
   input <- Unsafe.expose
   let paramEnd = paramEndSucc - 1
