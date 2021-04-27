@@ -1,8 +1,7 @@
-# diviner
+# Diviner
 
 ### Summary
-This repository contains 
-A grab bag for decoding logs whose formats are completely undocumented.
+This repository formats logs that have not been publicly documented. 
 
 ### Use Cases
 SSH 
